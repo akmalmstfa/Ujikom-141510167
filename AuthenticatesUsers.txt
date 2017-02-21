@@ -1,0 +1,18 @@
+
+        if($user->type === 'admin') {
+
+            return redirect()->intended('/admin');
+
+        }else if ($user->type === 'hrd') {
+
+            return redirect()->intended('/hrd');
+
+        }else if ($user->type === 'keuangan') {
+
+            return redirect()->intended('/keuangan');
+
+        }else if ($user->type === 'pegawai') {
+
+            return redirect()->intended('/pegawai');
+
+        }
