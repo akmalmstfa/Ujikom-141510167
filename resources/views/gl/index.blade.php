@@ -28,7 +28,7 @@
 		            <tbody>
 			            @if($goal == 0)
 				        <tr>
-				          <td colspan="4" align="center"><h3><b>Golongan jabatan belum dibauat!</b></h3></td>
+				          <td colspan="4" align="center"><h3><b>Golongan jabatan belum dibuat!</b></h3></td>
 				        </tr>
 			            @else
 			            @php

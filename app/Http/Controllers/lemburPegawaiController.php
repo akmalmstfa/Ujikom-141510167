@@ -21,8 +21,9 @@ class lemburPegawaiController extends Controller
     {
         // $date = date('Y-m-d');
         // dd(date('Y-m-d',strtotime('-1 month -1 days', strtotime($date))));
-        $dates = Lembur_pegawai::with('Kategori_lembur','Pegawai')->get();
-        // dd($datas);
+        $dates = Lembur_pegawai::with('Kategori_lembur','Pegawai')
+                                ->orderBy('created_at','DESC')
+                                ->get();
 
         return view('lembur.index',compact('dates'));
     }
@@ -102,12 +103,12 @@ class lemburPegawaiController extends Controller
         // dd(date('Y-m-d'));
         $lembur     = Lembur_pegawai::find($id);
         $lemburs    = Lembur_pegawai::whereDate('created_at',date('Y-m-d'))->get();
-        $pegawai    = Pegawai::with('User')->where('id',$lembur->pegawai_id)->first();
         $data = [];
         foreach ($lemburs as &$value) {
             $data[]=$value->pegawai_id;
         }
-        $pegawais   = Pegawai::whereNotIn('id',$data)->get();
+        $pegawais   = Pegawai::with('User')->whereNotIn('id',$data)->get();
+        $pegawai    = Pegawai::with('User')->where('id',$lembur->pegawai_id)->first();
 
         return view('lembur.edit',compact('pegawai','pegawais','lembur'));
     }

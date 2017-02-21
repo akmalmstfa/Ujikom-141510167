@@ -45,6 +45,12 @@
             <p>Lembur Pegawai</p>
         </a>
     </li>
+    <li class="{{ Request::is('keuangan/tunjangan*') ? 'active' : '' }}">
+        <a href="{{route('tunjangan.index')}}">
+            <i class="ion-plane"></i>
+            <p>Tunjangan</p>
+        </a>
+    </li>
 @elseif(Auth::user()->permission == 'pegawai')
 @endif
 

@@ -85,7 +85,7 @@ class JabatanController extends Controller
         ]);
 
         Alert::success('Data berhasil disimpan!', 'Saved!');
-        return redirect(route('jabatan.index'));
+        return redirect(route('jabatan-hrd.index'));
 
     }
 

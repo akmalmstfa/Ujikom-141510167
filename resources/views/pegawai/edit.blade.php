@@ -11,9 +11,9 @@
                 {!! Form::model($pegawai, ['class' => 'form-horizontal',  'enctype' => 'multipart/form-data', 'method' => 'PATCH', 'route' => ['pegawai.update', $pegawai->id], 'files' => true]) !!}
 
                     <div class="form-group{{ $errors->has('Nip') ? ' has-error' : '' }}">
-                        <label for="Nip" class="col-md-4 control-label">Kode Jabatan</label>
+                        <label for="Nip" class="col-md-4 control-label">NIP</label>
                         <div class="col-md-6">
-                            <input type="text" name="Nip" class="form-control" value="{{ $pegawai->Nip }}">
+                            <input type="text" name="Nip" class="form-control" value="{{ $pegawai->Nip }}" readonly>
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

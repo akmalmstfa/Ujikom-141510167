@@ -38,6 +38,7 @@ Route::group(['prefix' => '/keuangan','middleware'=>['keuangan']], function(){
 	Route::get('golem/tambah-golongan/{kode}', 'hrdController@addgol')->name('addgol');
 	Route::get('golem/edit-golongan/{idg}/{idkl}', 'hrdController@golemedit')->name('upgol');
 	Route::resource('lemburpegawai', 'lemburPegawaiController');
+	Route::resource('tunjangan', 'tunjanganController');
 });
 
 Route::group(['prefix' => '/pegawai','middleware'=>['pegawai']], function(){

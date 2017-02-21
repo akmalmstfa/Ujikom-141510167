@@ -13,7 +13,7 @@
 			<thead>
 				<tr class="success">
 					<th><center>No</center></th>
-					<th>Kode Lembur</th>
+					{{-- <th>Kode Lembur</th> --}}
 					<th>Nama Pegawai</th>
 					<th>Jumlah Jam</th>
 					<th>Tanggal Lembur</th>
@@ -27,7 +27,7 @@
 				@foreach($dates as $data)
 					<tr>
 						<td><center>{{ $no++ }}</center></td>
-						<td>{{ $data->Kategori_lembur->Kode_lembur }}</td>
+						{{-- <td>{{ $data->Kategori_lembur->Kode_lembur }}</td> --}}
 						@php
 						$nama = DB::table('users')->where('id',$data->Pegawai->user_id)->first();
 						@endphp

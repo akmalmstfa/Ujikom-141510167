@@ -13,22 +13,23 @@
                             <label for="pegawai_id" class="col-md-4 control-label">Nama Pegawai</label>
                             <div class="col-md-6">
                                 <select id="pegawai_id" type="text" class="form-control" name="pegawai_id" required autofocus>
-                                    @foreach($pegawais as $pegawai)
-                                        <option value="{{$pegawai->id}}">{{$pegawai->User->name}}</option>
+                                    @foreach($pegawais as $pegawaiy)
+                                        <option value="{{$pegawaiy->id}}">{{$pegawaiy->User->name}}</option>
                                     @endforeach
+                                        <option value="{{$pegawai->id}}" selected>{{$pegawai->User->name}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('Jumlah_jam') ? ' has-error' : '' }}">
                             <label for="Jumlah_jam" class="col-md-4 control-label">Jumlah Jam</label>
                             <div class="col-md-6">
-                                <input id="Jumlah_jam" type="number" class="form-control" min="1" max="5" name="Jumlah_jam"  required autofocus>
+                                <input id="Jumlah_jam" type="number" value="{{$lembur->Jumlah_jam}}" class="form-control" min="1" max="5" name="Jumlah_jam"  required autofocus>
                             </div>
                         </div>
 						<div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Tambah
+                                    Edit
                                 </button>
                                 <a href="{{ route('lemburpegawai.index') }}" class="btn btn-default">Batal</a>
                             </div>

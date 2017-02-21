@@ -9,7 +9,7 @@
 					<th><center>No</center></th>
 					<th>Nip</th>
 					<th>Nama Pegawai</th>
-					<th>Permission</th>
+					{{-- <th>Permission</th> --}}
 					<th>Nama Jabatan</th>
 					<th>Nama Golongan</th>
 					<th>Photo</th>
@@ -25,7 +25,7 @@
 						<td><center>{{ $no++ }}</center></td>
 						<td>{{ $data->Nip }}</td>
 						<td>{{ $data->User->name }}</td>
-						<td>{{ $data->User->permission }}</td>
+						{{-- <td>{{ $data->User->permission }}</td> --}}
 						<td>{{ $data->Jabatan->Nama_jabatan }}</td>
 						<td>{{ $data->Golongan->Nama_golongan }}</td>
 						<td>
