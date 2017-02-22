@@ -18,6 +18,11 @@ class keuangan
         if (auth()->check() && $request->user()->permission == 'keuangan') {
         return $next($request);
         }
+        
+        if (auth()->guest()) {
+            return redirect()->guest(route('login'));
+        } else{
             return redirect()->guest(route('cannotacces'));
+        } 
     }
 }

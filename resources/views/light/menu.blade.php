@@ -35,7 +35,7 @@
 @elseif(Auth::user()->permission == 'keuangan')
     <li class="{{ Request::is('keuangan/golem*') ? 'active' : '' }}">
         <a href="{{route('golem.index')}}">
-            <i class="pe-7s-cash"></i>
+            <i class="ion-coffee"></i>
             <p>Golongan & Lembur</p>
         </a>
     </li>
@@ -49,6 +49,18 @@
         <a href="{{route('tunjangan.index')}}">
             <i class="ion-plane"></i>
             <p>Tunjangan</p>
+        </a>
+    </li>
+    <li class="{{ Request::is('keuangan/pegawai-tunjangan*') ? 'active' : '' }}">
+        <a href="{{route('pegawai-tunjangan.index')}}">
+            <i class="ion-cash"></i>
+            <p>Tunjangan Pegawai</p>
+        </a>
+    </li>
+    <li class="{{ Request::is('keuangan/penggajian*') ? 'active' : '' }}">
+        <a href="{{route('penggajian.index')}}">
+            <i class="pe-7s-cash"></i>
+            <p>Penggajian</p>
         </a>
     </li>
 @elseif(Auth::user()->permission == 'pegawai')

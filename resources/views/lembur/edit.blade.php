@@ -8,7 +8,7 @@
                 </div>
                 <div class="content">
                 <hr>
-                    {!!Form::open(['route' => 'lemburpegawai.store', 'class' => 'form-horizontal']) !!}
+                    {!!Form::model($lembur,['method' => 'PATCH','route' => ['lemburpegawai.update',$lembur->id], 'class' => 'form-horizontal']) !!}
 						<div class="form-group{{ $errors->has('pegawai_id') ? ' has-error' : '' }}">
                             <label for="pegawai_id" class="col-md-4 control-label">Nama Pegawai</label>
                             <div class="col-md-6">

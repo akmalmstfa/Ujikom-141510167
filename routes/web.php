@@ -15,6 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+		if (Auth::user()->permission == 'admin') {
+	    	return redirect(url('/admin'));
+		}elseif (Auth::user()->permission == 'hrd') {
+	    	return redirect(url('/hrd'));
+		}elseif (Auth::user()->permission == 'keuangan') {
+	    	return redirect(url('/keuangan'));
+		}elseif (Auth::user()->permission == 'pegawai') {
+	    	return redirect(url('/pegawai'));
+		}
+});
+
+
+Route::get('403', function () {
+    return view('errors.403');
+})->name('cannotacces');
+
 Auth::routes();
 
 
@@ -39,6 +56,9 @@ Route::group(['prefix' => '/keuangan','middleware'=>['keuangan']], function(){
 	Route::get('golem/edit-golongan/{idg}/{idkl}', 'hrdController@golemedit')->name('upgol');
 	Route::resource('lemburpegawai', 'lemburPegawaiController');
 	Route::resource('tunjangan', 'tunjanganController');
+	Route::resource('pegawai-tunjangan', 'tunjanganPegawaiController');
+	Route::get('pegawai-tunjangan/{id}/create', 'tunjanganPegawaiController@createtunjangan')->name('create-tunjangan');
+	Route::resource('penggajian', 'penggajianController');
 });
 
 Route::group(['prefix' => '/pegawai','middleware'=>['pegawai']], function(){

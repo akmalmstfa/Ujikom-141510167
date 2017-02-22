@@ -18,6 +18,11 @@ class pegawai
         if (auth()->check() && $request->user()->permission == 'pegawai') {
         return $next($request);
         }
+        
+        if (auth()->guest()) {
+            return redirect()->guest(route('login'));
+        } else{
             return redirect()->guest(route('cannotacces'));
+        } 
     }
 }

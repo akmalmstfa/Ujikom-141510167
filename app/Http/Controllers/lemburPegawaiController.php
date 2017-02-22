@@ -49,6 +49,7 @@ class lemburPegawaiController extends Controller
         }
         $lemburs    = Lembur_pegawai::whereDate('created_at',date('Y-m-d'))->get();
 
+            $data= [];
         foreach ($lemburs as &$value) {
             $data[]=$value->pegawai_id;
         }
@@ -78,6 +79,7 @@ class lemburPegawaiController extends Controller
             'Jumlah_jam' => $input['Jumlah_jam'],
         ]);
 
+        Alert::success('Data berhasil disimpan','Saved!');
         return redirect(route('lemburpegawai.index'));
     }
 
@@ -125,6 +127,9 @@ class lemburPegawaiController extends Controller
         $lembur = Lembur_pegawai::find($id);
         $lembur->Jumlah_jam = $request['Jumlah_jam'];
         $lembur->save();
+        
+        Alert::success('Data berhasil diperbarui','Updated!');
+        return redirect(route('lemburpegawai.index'));
     }
 
     /**
@@ -135,7 +140,15 @@ class lemburPegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lembur = Lembur_pegawai::find($id);
+
+        if (empty($lembur)) {
+            Alert::error('Data sudah tidak ada','Error!');
+            return redirect(route('lemburpegawai.index'));
+        }
+        $lembur->delete();
+        return redirect(route('lemburpegawai.index'));
+
     }
 
 }

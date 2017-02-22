@@ -19,7 +19,9 @@ class tunjanganController extends Controller
      */
     public function index()
     {
-        $tunjangans = Tunjangans::with('Jabatan','Golongan')->get();
+        $tunjangans = Tunjangans::with('Jabatan','Golongan')
+                            ->orderBy('jabatan_id')
+                            ->get();
         return view('tunjangan.index',compact('tunjangans'));
     }
 
