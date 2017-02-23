@@ -7,6 +7,8 @@ use App\Jabatan;
 use App\Golongan;
 use App\User;
 use App\Pegawai;
+use App\Tunjangans;
+use App\Tunjangan_pegawai;
 use App\Kategori_lembur;
 use DB;
 use Validator;
@@ -71,9 +73,21 @@ class PegawaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // dd($request->all());
-        // dd($request->file('Photo'));    
+    {  
+         $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:100|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'permission' => 'required',
+            'jabatan_id' => 'required',
+            'golongan_id' => 'required',
+                ]);
+        if ($validator->fails()) {
+            return redirect(route('pegawai.create'))
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $input = $request->all();
         $user = User::create([
             'name' => $input['name'],
@@ -181,8 +195,20 @@ class PegawaiController extends Controller
             $uploadSuccess = $file->move($destinationPath, $filename);
             $pegawai->Photo = $filename;
         }
+        $tunjangan = Tunjangans::where('jabatan_id',$result_explode[0])
+                                ->where('golongan_id',$result_explode[1])
+                                ->first();
+        if (!empty($tunjangan)) {
+                $tunjanganP = Tunjangan_pegawai::find($pegawai->id);
+                if (!empty($tunjanganP)) {
+                    $tunjanganP->Kode_tunjangan_id = $tunjangan->id;
+                    $tunjanganP->save();
+                }
+        }
         
         $pegawai->save();
+
+
         Alert::success('Data berhasil diperbarui!', 'Updated!');
         return redirect(route('pegawai.index'));
     }

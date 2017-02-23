@@ -64,6 +64,12 @@
         </a>
     </li>
 @elseif(Auth::user()->permission == 'pegawai')
+    <li class="{{ Request::is('pegawai/gaji*') ? 'active' : '' }}">
+        <a href="{{route('gaji')}}">
+            <i class="pe-7s-cash"></i>
+            <p>Gaji</p>
+        </a>
+    </li>
 @endif
 
 <li class="active-pro">

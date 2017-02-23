@@ -157,12 +157,17 @@ class hrdController extends Controller
             return redirect(route('golem.index'));
         }
 
-        $uang = substr($request->Besaran_uang,4);
-        $hasiluang = str_replace(".", "", $uang);
+        $format = substr($request->Besaran_uang,0,2);
+        if ($format === 'Rp') {
+            $uang = substr($request->Besaran_uang,4);
+            $hasiluang = str_replace(".", "", $uang);
+        }else{
+            $hasiluang = $request->Besaran_uang;
+        }
         $check = (int)$hasiluang;
         if ($check == 0) {
             Alert::error('Besaran uang tidak boleh diisi 0!', 'Error !');
-            return redirect(url('golem/edit-golongan/'.$golongan->id.'/'.$kl->id))
+            return redirect(url('keuangan/golem/edit-golongan/'.$golongan->id.'/'.$kl->id))
                             ->withInput($request->input());
         }
 
@@ -171,8 +176,13 @@ class hrdController extends Controller
                 'Besaran_uang' =>$hasiluang,
             ]);
 
-        $uang2 = substr($request->lembur,4);
-        $hasiluang2 = str_replace(".", "", $uang2);
+        $format = substr($request->lembur,0,2);
+        if ($format === 'Rp') {
+            $uang2 = substr($request->lembur,4);
+            $hasiluang2 = str_replace(".", "", $uang2);
+        }else{
+            $hasiluang2 = $request->lembur;
+        }
         $check = (int)$hasiluang2;
         if ($check == 0) {
             Alert::error('Besaran uang lembur tidak boleh diisi 0!', 'Error !');

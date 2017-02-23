@@ -8,7 +8,7 @@
                     <hr>
                 </div>
                 <div class="content">
-                    {!!Form::open(['route' => ['golem.update',$golongan->id], 'class' => 'form-horizontal','method' => 'patch']) !!}
+                    {!!Form::model($golongan,['route' => ['golem.update',$golongan->id], 'class' => 'form-horizontal','method' => 'patch']) !!}
 						<div class="form-group">
                             <label for="nama" class="col-md-4 control-label">Nama Goloongan</label>
 							<div class="col-md-6">

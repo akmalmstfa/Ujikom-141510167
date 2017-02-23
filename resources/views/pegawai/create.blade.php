@@ -80,7 +80,8 @@
                         <div class="form-group{{ $errors->has('jabatan_id') ? ' has-error' : '' }}">
                             <label for="jabatan_id" class="col-md-4 control-label">Nama Jabatan</label>
                             <div class="col-md-6">
-                                <select name="jabatan_id" id="jabatan_id" class="form-control select2">
+                                <select name="jabatan_id" id="jabatan_id" class="form-control select2"  required>
+                                        <option value="">Pilih Jabatan</option>
                                     @foreach($jabatan as $data)
                                         <option value="{{ $data->id }}">{{ $data->Nama_jabatan }}</option>
                                     @endforeach
@@ -91,7 +92,8 @@
                         <div class="form-group{{ $errors->has('golongan_id') ? ' has-error' : '' }}">
                             <label for="golongan_id" class="col-md-4 control-label">Nama Golongan</label>
                             <div class="col-md-6">
-                                <select name="golongan_id" id="golongan_id" class="form-control select2">
+                                <select name="golongan_id" id="golongan_id" class="form-control select2" required>
+                                        <option value="">Pilih Golongan</option>
                                 </select>
                             </div>
                         </div>

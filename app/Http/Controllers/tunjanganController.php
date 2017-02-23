@@ -50,14 +50,14 @@ class tunjanganController extends Controller
         if ($format === 'Rp') {
             $uang = substr($request->besaran_uang,4);
             $hasiluang = str_replace(".", "", $uang);
-            $check = (int)$hasiluang;
-            if ($check == 0) {
-                Alert::error('Besaran uang tidak boleh diisi 0!', 'Error !');
-                return redirect(route('tunjangan.create'))
-                                ->withInput($request->input());
-            }
         }else{
             $hasiluang = $request->besaran_uang;
+        }
+        $check = (int)$hasiluang;
+        if ($check == 0) {
+            Alert::error('Besaran uang tidak boleh diisi 0!', 'Error !');
+             return redirect(route('tunjangan.create'))
+                            ->withInput($request->input());
         }
 
         $gj = $request->golongan_id;
@@ -144,14 +144,14 @@ class tunjanganController extends Controller
         if ($format === 'Rp') {
             $uang = substr($request->besaran_uang,4);
             $hasiluang = str_replace(".", "", $uang);
-            $check = (int)$hasiluang;
-            if ($check == 0) {
-                Alert::error('Besaran uang tidak boleh diisi 0!', 'Error !');
-                return redirect(route('tunjangan.create'))
-                                ->withInput($request->input());
-            }
         }else{
             $hasiluang = $request->besaran_uang;
+        }
+        $check = (int)$hasiluang;
+        if ($check == 0) {
+            Alert::error('Besaran uang tidak boleh diisi 0!', 'Error !');
+            return redirect(route('tunjangan.create'))
+                            ->withInput($request->input());
         }
 
         $gj = $request->golongan_id;

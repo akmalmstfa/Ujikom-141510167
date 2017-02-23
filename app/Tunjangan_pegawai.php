@@ -22,3 +22,4 @@ class Tunjangan_pegawai extends Model
         return $this->hasMany('App\Penggajian', 'tunjangan_pegawai_id');
     }
 }
+        

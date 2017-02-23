@@ -63,5 +63,6 @@ Route::group(['prefix' => '/keuangan','middleware'=>['keuangan']], function(){
 
 Route::group(['prefix' => '/pegawai','middleware'=>['pegawai']], function(){
 	Route::get('/', 'HomeController@index');
-	
+	Route::get('gaji', 'penggajianController@gaji')->name('gaji');
+	Route::get('ambil-gaji/{id}', 'penggajianController@ambil');
 });

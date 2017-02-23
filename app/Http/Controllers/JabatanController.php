@@ -64,8 +64,13 @@ class JabatanController extends Controller
     public function store(Request $request)
     {
 
-        $uang = substr($request->Besaran_uang,4);
-        $hasiluang = str_replace(".", "", $uang);
+        $format = substr($request->Besaran_uang,0,2);
+        if ($format === 'Rp') {
+            $uang = substr($request->Besaran_uang,4);
+            $hasiluang = str_replace(".", "", $uang);
+        }else{
+            $hasiluang = $request->Besaran_uang;
+        }
         $check = (int)$hasiluang;
         if ($check == 0) {
             Alert::error('Besaran uang tidak boleh diisi 0!', 'Error !');
@@ -125,8 +130,13 @@ class JabatanController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $uang = substr($request->Besaran_uang,4);
-        $hasiluang = str_replace(".", "", $uang);
+        $format = substr($request['Besaran_uang'],0,2);
+        if ($format === 'Rp') {
+            $uang = substr($request['Besaran_uang'],4);
+            $hasiluang = str_replace(".", "", $uang);
+        }else{
+            $hasiluang = $request['Besaran_uang'];
+        }
         $request['Besaran_uang'] = $hasiluang;
         $jabatanUpdate = $request->all();
         $jabatan = Jabatan::find($id);
