@@ -48,19 +48,43 @@
 				              <td>{{ 'Rp. '.number_format($golongan->Besaran_uang, 2, ",", ".") }}</td>
 				              <td>{{ 'Rp. '.number_format($kl->Besaran_uang, 2, ",", ".") }}</td>
 				              <td align="center">
-				        		{!! Form::open(['route' => ['golem.destroy',$golongan->id], 'method' => 'delete']) !!}
+				              	@if($jabatan->Kode_jabatan === 'J001')
 				                <div class='btn-group'>
-				              		<a href="{{ url('keuangan/golem/edit-golongan/'.$golongan->id.'/'.$kl->id)}}" class='btn btn-default btn-sm'><i class="ion-edit"></i></a>
-				                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
+				              		<a href="javascript:;" class='btn btn-default btn-sm' title="data golongan jabatan admin tidak bisa diedit" disabled><i class="ion-edit"></i></a>
+				              		<a href="javascript:;" class='btn btn-danger btn-sm' title="data golongan jabatan admin tidak bisa dihapus" disabled><i class="ion-ios-trash"></i></a>
 				                </div>
-				                {!! Form::close() !!}
+				              	@else
+					            @if(Auth::user()->permission === 'hrd')
+					            	{!! Form::open(['route' => ['golem-hrd.destroy',$golongan->id], 'method' => 'delete']) !!}
+					                <div class='btn-group'>
+					              		<a href="{{ url('hrd/golem-hrd/edit-golongan/'.$golongan->id.'/'.$kl->id)}}" class='btn btn-default btn-sm'><i class="ion-edit"></i></a>
+					                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
+					                </div>
+					                {!! Form::close() !!}
+					            @else
+					        		{!! Form::open(['route' => ['golem.destroy',$golongan->id], 'method' => 'delete']) !!}
+					                <div class='btn-group'>
+					              		<a href="{{ url('keuangan/golem/edit-golongan/'.$golongan->id.'/'.$kl->id)}}" class='btn btn-default btn-sm'><i class="ion-edit"></i></a>
+					                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
+					                </div>
+					                {!! Form::close() !!}
+					            @endif
+				                @endif
 				              </td>
 				            </tr>
 				            @endforeach
 			            @endif
 			          	<tr>
 				        	<td colspan="5">
-				        		<a href="{{ route('addgol',$jabatan->Kode_jabatan) }}" class='btn btn-default'><i class="ion-ios-plus-outline"></i> Tambah Golongan</a>
+				              	@if($jabatan->Kode_jabatan === 'J001')
+				        		<a href="javascript:;" class='btn btn-default' disabled title="data golongan jabatan admin tidak bisa ditambah"><i class="ion-ios-plus-outline"></i> Tambah Golongan</a>
+				              	@else
+					              	@if(Auth::user()->permission === 'hrd')
+					        		<a href="{{ route('addgol-hrd',$jabatan->Kode_jabatan) }}" class='btn btn-default'><i class="ion-ios-plus-outline"></i> Tambah Golongan</a>
+					              	@else
+					        		<a href="{{ route('addgol',$jabatan->Kode_jabatan) }}" class='btn btn-default'><i class="ion-ios-plus-outline"></i> Tambah Golongan</a>
+					        		@endif
+				                @endif
 				        	</td>
 			          	</tr>
 		            </tbody>

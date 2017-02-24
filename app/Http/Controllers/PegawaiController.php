@@ -61,7 +61,7 @@ class PegawaiController extends Controller
         }
 
         $dd = User::all();
-        $jabatan = Jabatan::with('Golongan')->get();
+        $jabatan = Jabatan::whereNotIn('Kode_jabatan',['J001'])->with('Golongan')->get();
         $golongan = Golongan::all();
         return view('pegawai.create', compact('kode', 'pegawai', 'dd', 'jabatan', 'golongan'));
     }

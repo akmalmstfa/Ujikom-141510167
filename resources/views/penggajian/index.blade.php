@@ -2,8 +2,48 @@
 
 @section('content')
 		<h2>Data Jabatan</h2>
-		@if(date('d') == '5' && count(DB::table('penggajians')->whereDate('created_at',date('Y-m-5'))->get()) == 0)
-		<a href="{{route('penggajian.create')}}" style="margin-bottom: 10px;" class="btn btn-danger">Generate Gaji</a>
+		@if(date('d') == '24' && count(DB::table('penggajians')->whereDate('created_at',date('Y-m-24'))->get()) == 0)
+		@php
+			$tunjanganpegawai = DB::table('tunjangan_pegawais')
+										->select('tunjangan_pegawais.*')
+										->get();
+			$data = [];
+			foreach ($tunjanganpegawai as $value) 
+			{
+				$data[] = $value->pegawai_id;		
+			}		
+			$pagawes = DB::table('pegawais')
+						->whereNotIn('id',$data)
+						->get();
+			$notreg = count($pagawes);
+		@endphp
+			@if($notreg == 0)
+			<a href="{{route('penggajian.create')}}" style="margin-bottom: 10px;" class="btn btn-danger">Generate Gaji</a>
+			@else
+			<button type="button" class="btn btn-danger" style="margin-bottom: 10px;"  data-toggle="modal" data-target="#AlertConfirm">Generate Gaji</button>
+
+			<!-- Modal -->
+			  <div class="modal fade" id="AlertConfirm" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h24 class="modal-title">Tunjangan</h5>
+			        </div>
+			        <div class="modal-body">
+			        	<p>Ada pegawai yang belum memiliki tunjangan, Jika pegawai tidak memiliki tunjangan gajinya tidak akan tergenerate. mohon periksa page <a href="{{route('pegawai-tunjangan.index')}}">Tunjangan Pegawai</a></p>
+			        </div>
+			        <div class="modal-footer">
+						<a href="{{route('penggajian.create')}}" class="btn btn-primary">Tetap Generate</a>
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
+			@endif
 		@else
 		<a href="javascript:;"  style="margin-bottom: 10px;" class="btn btn-danger" disabled>Generate Gaji</a>
 		@endif

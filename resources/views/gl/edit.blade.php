@@ -8,7 +8,11 @@
                     <hr>
                 </div>
                 <div class="content">
+                @if(Auth::user()->permission === 'hrd')
+                    {!!Form::model($golongan,['route' => ['golem-hrd.update',$golongan->id], 'class' => 'form-horizontal','method' => 'patch']) !!}
+                @else
                     {!!Form::model($golongan,['route' => ['golem.update',$golongan->id], 'class' => 'form-horizontal','method' => 'patch']) !!}
+                @endif
 						<div class="form-group">
                             <label for="nama" class="col-md-4 control-label">Nama Goloongan</label>
 							<div class="col-md-6">
@@ -35,7 +39,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     Edit
                                 </button>
-                                <a href="{{ route('golem.index') }}" class="btn btn-default">Batal</a>
+                                @if(Auth::user()->permission === 'hrd')
+                                    <a href="{{ route('golem-hrd.index') }}" class="btn btn-default">Batal</a>
+                                @else
+                                    <a href="{{ route('golem.index') }}" class="btn btn-default">Batal</a>
+                                @endif
                             </div>
                         </div>
 					{!! Form::close() !!}

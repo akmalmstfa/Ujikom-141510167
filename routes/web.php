@@ -46,6 +46,9 @@ Route::group(['prefix' => '/hrd','middleware'=>['hrd']], function(){
 	Route::get('/', 'HomeController@index');
 	Route::resource('jabatan-hrd', 'JabatanController');
 	Route::resource('pegawai', 'PegawaiController');
+	Route::resource('golem-hrd', 'hrdController');
+	Route::get('golem-hrd/tambah-golongan/{kode}', 'hrdController@addgol')->name('addgol-hrd');
+	Route::get('golem-hrd/edit-golongan/{idg}/{idkl}', 'hrdController@golemedit')->name('upgol-hrd');
 	
 });
 

@@ -24,7 +24,7 @@ class CreatePenggajiansTable extends Migration
             $table->integer('Gaji_pokok');
             $table->integer('Total_gaji');
             $table->date('Tanggal_pengambilan')->nullable();
-            $table->tinyInteger('Status_pengambilan');
+            $table->tinyInteger('Status_pengambilan')->default(0);
             $table->string('Petugas_penerima');
             $table->timestamps();
         });

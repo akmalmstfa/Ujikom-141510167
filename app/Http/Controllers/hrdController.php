@@ -8,6 +8,7 @@ use App\Golongan;
 use App\Kategori_lembur;
 use Alert;
 use DB;
+use Auth;
 
 class hrdController extends Controller
 {
@@ -103,7 +104,12 @@ class hrdController extends Controller
         ]);
 
         Alert::success('Data berhasil disimpan!', 'Saved!');
-        return redirect(route('golem.index'));
+
+        if(Auth::user()->permission === 'hrd'){
+            return redirect(route('golem-hrd.index'));
+        }else{
+            return redirect(route('golem.index'));
+        }
     }
 
     
@@ -195,7 +201,12 @@ class hrdController extends Controller
             ]);
 
         Alert::success('Data berhasil disimpan!','Saved!');
-        return redirect(route('golem.index'));
+        
+        if(Auth::user()->permission === 'hrd'){
+            return redirect(route('golem-hrd.index'));
+        }else{
+            return redirect(route('golem.index'));
+        }
     }
 
     public function destroy($id)
@@ -211,6 +222,11 @@ class hrdController extends Controller
         $golongan = Golongan::find($id)->delete();
 
         Alert::success('Data berhasil dihapus','Deleted!');
-        return redirect(route('golem.index'));
+        
+        if(Auth::user()->permission === 'hrd'){
+            return redirect(route('golem-hrd.index'));
+        }else{
+            return redirect(route('golem.index'));
+        }
     }
 }

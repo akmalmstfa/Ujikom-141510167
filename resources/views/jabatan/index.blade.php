@@ -30,12 +30,19 @@
 						<td>{{ 'Rp. '.number_format($data->Besaran_uang, 2, ",", ".") }}</td>
 					@if(Auth::user()->permission == 'hrd')
 		            <td>
+				        @if($data->Kode_jabatan == 'J001')
+		                <div class='btn-group'>
+		                    <a href="javascript:;" class='btn btn-default btn-sm' title="jabatan admin tidak bisa di edit"><i class="ion-edit"></i></a>
+		                    <a href="javascript:;" class='btn btn-danger btn-sm' title="jabatan admin tidak bisa di hapus"><i class="ion-ios-trash"></i></a>
+		                </div>
+				        @else
 		                {!! Form::open(['route' => ['jabatan-hrd.destroy', $data->id], 'method' => 'delete']) !!}
 		                <div class='btn-group'>
-		                    <a href="{!! route('jabatan-hrd.edit', [$data->id]) !!}" class='btn btn-default btn-xs'><i class="ion-edit"></i></a>
-		                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
+		                    <a href="{!! route('jabatan-hrd.edit', [$data->id]) !!}" class='btn btn-default btn-sm'><i class="ion-edit"></i></a>
+		                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
 		                </div>
 		                {!! Form::close() !!}
+				        @endif
 		            </td>
 					@endif
 

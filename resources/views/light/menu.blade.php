@@ -26,6 +26,12 @@
             <p>Jabatan</p>
         </a>
     </li>
+    <li class="{{ Request::is('hrd/golem-hrd*') ? 'active' : '' }}">
+        <a href="{{route('golem-hrd.index')}}">
+            <i class="ion-coffee"></i>
+            <p>Golongan & Lembur</p>
+        </a>
+    </li>
     <li class="{{ Request::is('hrd/pegawai*') ? 'active' : '' }}">
         <a href="{{route('pegawai.index')}}">
             <i class="pe-7s-user"></i>

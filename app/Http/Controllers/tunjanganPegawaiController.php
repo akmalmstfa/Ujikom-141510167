@@ -25,6 +25,10 @@ class tunjanganPegawaiController extends Controller
         $tunjangans  = Tunjangans::where('jabatan_id',$pegawai->Jabatan->id)
                                 ->where('golongan_id',$pegawai->Golongan->id)
                                 ->get();
+        if (count($tunjangans) == 0) {
+            Alert::error('Tunjangan untuk Jabatan & Golongan '.$pegawai->User->name.' belum tersedia','Error!')->autoclose(2900);
+            return redirect(route('pegawai-tunjangan.index'));
+        }
         return view('tunjanganP.create', compact('pegawai','tunjangans'));
     }
 

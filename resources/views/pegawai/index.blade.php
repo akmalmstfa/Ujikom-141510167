@@ -32,12 +32,19 @@
 							<img src="{{asset('/image/'.$data->Photo)}}" height="50px" width="50px">
 						</td>
 						<td>
+						@if($data->Jabatan->Nama_jabatan === 'Admin')
+			                <div class='btn-group'>
+			                    <a href="javascript:;" class='btn btn-default btn-sm' title="data pegawai admin tidak bisa diedit"><i class="ion-edit"></i></a>
+			                    <a href="javascript:;" class='btn btn-danger btn-sm' title="data pegawai admin tidak bisa dihapus"><i class="ion-ios-trash"></i></a>
+			                </div>
+						@else
 			                {!! Form::open(['route' => ['pegawai.destroy', $data->id], 'method' => 'delete']) !!}
 			                <div class='btn-group'>
-			                    <a href="{!! route('pegawai.edit', [$data->id]) !!}" class='btn btn-default btn-xs'><i class="ion-edit"></i></a>
-			                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
+			                    <a href="{!! route('pegawai.edit', [$data->id]) !!}" class='btn btn-default btn-sm'><i class="ion-edit"></i></a>
+			                    {!! Form::button('<i class="ion-ios-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Yakin ingin menghapus data ini?')"]) !!}
 			                </div>
 			                {!! Form::close() !!}
+			            @endif
 						</td>
 					</tr>
 				@endforeach

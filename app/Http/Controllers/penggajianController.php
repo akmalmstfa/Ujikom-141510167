@@ -26,7 +26,7 @@ class penggajianController extends Controller
 
     public function create()
     {
-        if (date('d') == '5' && count(Penggajian::whereDate('created_at',date('Y-m-5'))->get()) == 0) {
+        if (date('d') == '24' && count(Penggajian::whereDate('created_at',date('Y-m-24'))->get()) == 0) {
             $pegawai = Pegawai::with('Jabatan','Golongan','Tunjangan_pegawai')->get();
 
             $now = date('Y-m-d');
@@ -47,8 +47,10 @@ class penggajianController extends Controller
                 $jumlah_uang_lembur = $jumlah_jam * $kalem->Besaran_uang;
 
                 $gaji_pokok = $value->Golongan->Besaran_uang + $value->Jabatan->Besaran_uang; 
+                if (empty($value->Tunjangan_pegawai)) {
 
-                $tunjangan = Tunjangans::where('id',$value->Tunjangan_pegawai->id)->first();
+                }else{
+                $tunjangan = Tunjangans::find($value->Tunjangan_pegawai->Kode_tunjangan_id);
 
                 if ($tunjangan->Jumlah_anak == 0) {
                     $total_gaji = $gaji_pokok + $jumlah_uang_lembur +  $tunjangan->Besaran_uang;
@@ -64,11 +66,13 @@ class penggajianController extends Controller
                     'Petugas_penerima'      => Auth::user()->name,
                     'Status_pengambilan'    => 0,
                 ]);
+
+                }
             }
             Alert::success('Gaji berhasil di generate','Generated!');
             return redirect(route('penggajian.index'));
         }else{
-            Alert::error('Mohon maaf generate gaji hanya bisa tanggal 5 saja','Error!')->autoclose(2900);
+            Alert::error('Mohon maaf generate gaji hanya bisa tanggal 24 saja','Error!')->autoclose(2900);
             return redirect(route('penggajian.index'));
         }
     }
